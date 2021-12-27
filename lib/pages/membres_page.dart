@@ -26,10 +26,7 @@ class _MembresPageState extends State<MembresPage> {
   TextEditingController _editMembreMobile2Controller  =new TextEditingController();
 
 
-  TextEditingController _conNomMembre = new TextEditingController();
-  TextEditingController  _conPrenomMembre = new TextEditingController();
-  TextEditingController  _conMobile1 = new TextEditingController();
-  TextEditingController  _conMobile2 = new  TextEditingController();
+
 
   var membre;
   var _membre= MembreClub();
@@ -59,10 +56,10 @@ class _MembresPageState extends State<MembresPage> {
   _editMembre(BuildContext context, id_membre) async {
     membre = await readMembreById(id_membre);
     setState(() {
-      _conNomMembre.text = membre[0]['nom_membre'] ?? 'No nom_membre';
-      _conPrenomMembre.text = membre[0]['prenom_membre'] ?? 'No prenom_membre';
-      _conMobile1.text = membre[0]['numtel1'] ?? 'No numtel1';
-      _conMobile2.text = membre[0]['numtel2'] ?? 'No numtel2';
+      _editMembreNameController.text = membre[0]['nom_membre'] ?? 'No nom_membre';
+      _editMembreNPrenomController.text = membre[0]['prenom_membre'] ?? 'No prenom_membre';
+      _editMembreMobile1Controller.text = membre[0]['numtel1'] ?? 'No numtel1';
+      _editMembreMobile2Controller.text = membre[0]['numtel2'] ?? 'No numtel2';
 
     });
     _editFormDialog(context);

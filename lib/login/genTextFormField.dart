@@ -10,6 +10,7 @@ class getTextFormField extends StatelessWidget {
   TextInputType inputType;
   bool isEnable;
 
+
   getTextFormField(
       {required this.controller,
         required this.hintName,
@@ -27,6 +28,7 @@ class getTextFormField extends StatelessWidget {
         obscureText: isObscureText,
         enabled: isEnable,
         keyboardType: inputType,
+
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintName';

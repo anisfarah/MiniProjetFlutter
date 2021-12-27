@@ -28,8 +28,6 @@ class _SignupFormState extends State<SignupForm> {
 
 
 
-
-
   _signUp() async {
     String uname = _conUserName.text;
     String email = _conEmail.text;
@@ -67,7 +65,7 @@ class _SignupFormState extends State<SignupForm> {
 
 // pour tester
  void _query() async {
-    final allRows = await dbHelper.queryAllRows();
+    final allRows = await dbHelper.queryAllRowsEmprunts();
     print('query all rows:');
     allRows.forEach(print);
   }

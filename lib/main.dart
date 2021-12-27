@@ -2,6 +2,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
+import 'package:mini_projeet/models/Admin.dart';
 import 'package:mini_projeet/pages/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mini_projeet/login/SignUp.dart';
@@ -34,7 +35,6 @@ class LoginDemo extends StatefulWidget {
 
 class _LoginDemoState extends State<LoginDemo> {
   Future<SharedPreferences> _pref = SharedPreferences.getInstance();
-  final _formKey = new GlobalKey<FormState>();
 
   final myEmailController = TextEditingController();
   final myPwdController = TextEditingController();
@@ -43,15 +43,12 @@ class _LoginDemoState extends State<LoginDemo> {
 
 
 
-  // row to insert
-
-
-
-
 
   login() async {
     String uid = myEmailController.text;
     String passwd = myPwdController.text;
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('email', uid);
 
     if (uid.isEmpty) {
       alertDialog(context, "Please Enter Email");
@@ -77,9 +74,9 @@ class _LoginDemoState extends State<LoginDemo> {
     }
   }
 
-  Future setSP( user) async {
+  Future setSP(Admin user) async {
     final SharedPreferences sp = await _pref;
-    sp.setString("id_admin", user.id_admin);
+    sp.setString("id_admin", user.id_admin.toString());
     sp.setString("nom_admin", user.nom_admin);
     sp.setString("password", user.email);
     sp.setString("email", user.password);
@@ -114,7 +111,8 @@ class _LoginDemoState extends State<LoginDemo> {
                     /*decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.asset('assets/images/KBR.png')),
+                    //child: Image.asset('assets/images/KBR.png')
+                ),
               ),
             ),
             Padding(
@@ -154,7 +152,7 @@ class _LoginDemoState extends State<LoginDemo> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
-                onPressed: login ,
+                onPressed: login,
 
                 child: Text(
                   'Login',
@@ -168,7 +166,8 @@ class _LoginDemoState extends State<LoginDemo> {
             TextButton(
               onPressed: (){
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => SignupForm()));             },
+                    context, MaterialPageRoute(builder: (_) => SignupForm()));
+                },
               child: Text(
                 'New User? Create Account',
                 style: TextStyle(color: Colors.blue, fontSize: 15),

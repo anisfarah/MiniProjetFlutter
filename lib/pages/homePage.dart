@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mini_projeet/main.dart';
 import 'package:mini_projeet/pages/composant_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mini_projeet/pages/emprunt_page.dart';
 import 'package:mini_projeet/pages/familleComposantPage.dart';
 import 'package:mini_projeet/pages/membres_page.dart';
 import 'package:mini_projeet/pages/user_page.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 import 'package:mini_projeet/widgets/button_widget.dart';
 
+
+String ?finalEmail;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +40,30 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
+
+
+
 class _MainPageState extends State<MainPage> {
+
+  @override
+  void initState() {
+    getValidationData();
+
+
+    super.initState();
+  }
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
+    var obteniedEmail=sharedPreferences.getString('email');
+    setState(() {
+      finalEmail=obteniedEmail;
+    }
+    );
+
+  }
+
+
   @override
   Widget build(BuildContext context) => Scaffold(
     drawer: NavigationDrawerWidget(),
@@ -67,7 +94,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = 'Administrateur';
-    final email = 'Admin@gmail.com';
+    final email = '$finalEmail';
     final urlImage =
         'https://www.mcicon.com/wp-content/uploads/2021/01/People_User_1-copy-4.jpg';
 

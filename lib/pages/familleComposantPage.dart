@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
@@ -16,7 +15,6 @@ class FamillesScreen extends StatefulWidget {
 class _FamillesScreenState extends State<FamillesScreen> {
   final dbHelper = DatabaseHelper.instance;
 
-  final _formKey = new GlobalKey<FormState>();
   TextEditingController _familleNameController  =new TextEditingController();
   TextEditingController _editfamilleNameController  =new TextEditingController();
 
@@ -42,10 +40,10 @@ class _FamillesScreenState extends State<FamillesScreen> {
     return await dbHelper.readDataById('famille', id_famille);
   }
 
-  _editCategory(BuildContext context, id_famille) async {
+  _editFamille(BuildContext context, id_famille) async {
     famille = await readFamilleById(id_famille);
     setState(() {
-      _familleNameController.text = famille[0]['nom_famille'] ?? 'No nom_famille';
+      _editfamilleNameController.text = famille[0]['nom_famille'] ?? 'No nom_famille';
 
     });
     _editFormDialog(context);
@@ -217,14 +215,6 @@ class _FamillesScreenState extends State<FamillesScreen> {
   }
 
 
-
-
-
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState!.showSnackBar(_snackBar);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -253,13 +243,16 @@ class _FamillesScreenState extends State<FamillesScreen> {
                   leading: IconButton(
                       icon: Icon(Icons.edit,color: Colors.blue),
                       onPressed: () {
-                        _editCategory(context, _familleList[index].id_famille);
+                        _editFamille(context, _familleList[index].id_famille);
 
                       }),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(_familleList[index].nom_famille),
+                      Text(_familleList[index].nom_famille,
+                          style: TextStyle(
+                              color: Colors.black54 , fontWeight: FontWeight.bold,fontSize: 15)
+                      ),
                       IconButton(
                           icon: Icon(
                             Icons.delete,
