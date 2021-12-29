@@ -96,7 +96,7 @@ class _addComposantPageState extends State<addComposantPage> {
         key: _formKey,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Container(    margin: const EdgeInsets.only(top: 25.0),
+          child: Container(    margin: const EdgeInsets.only(top: 20.0,left: 10,right: 10),
 
 
             child: Center(
@@ -106,23 +106,43 @@ class _addComposantPageState extends State<addComposantPage> {
 
 
                 children: [
-                  getTextFormField(
-                      controller: _conNomComposant,
-                      icon: Icons.person_outline,
-                      inputType: TextInputType.name,
-                      hintName: 'Nom composant'),
+
+                  TextField(
+                    keyboardType: TextInputType.name,
+                    controller: _conNomComposant,
+                    decoration: InputDecoration(
+                      hintText: 'Nom composant', labelText: 'Nom composant',
+                      prefixIcon: InkWell(
+
+                        child: Icon(Icons.person_outline,size: 25,),
+                      )
+                      ,),
+                  ),
                   SizedBox(height: 10.0),
-                  getTextFormField(
-                      controller: _conRefenceComposant,
-                      icon: Icons.email,
-                      inputType: TextInputType.emailAddress,
-                      hintName: 'Reference composant'),
+
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    controller: _conRefenceComposant,
+                    decoration: InputDecoration(
+                        hintText: 'Reference composant', labelText: 'Reference',
+                      prefixIcon: InkWell(
+
+                        child: Icon(Icons.email,size: 25,),
+                      )
+                      ,),
+                  ),
                   SizedBox(height: 10.0),
+
                   TextField(
                     keyboardType: TextInputType.number,
                     controller: _conQteDispo,
                     decoration: InputDecoration(
-                        hintText: 'Quantite stock', labelText: 'quantite'),
+                        hintText: 'Quantite stock', labelText: 'Quantite',
+                      prefixIcon: InkWell(
+
+                        child: Icon(Icons.format_list_numbered_sharp ,size: 25,),
+                      ),
+                    ),
                   ),
                   SizedBox(height: 10.0),
                   // getTextFormField(
@@ -130,48 +150,28 @@ class _addComposantPageState extends State<addComposantPage> {
                   //   icon: Icons.add_ic_call,
                   //   hintName: 'date_acquisaition',
                   // ),
-                  SizedBox(height: 10.0),
 
                   TextField(
                     controller: _conDateAqui,
                     decoration: InputDecoration(
-                      fillColor: Colors.grey[200],
-                      filled: true,
 
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        borderSide: BorderSide(color: Colors.blue),
-                      ),
                       labelText: 'Date',
                       hintText: 'Pick a Date',
                       prefixIcon: InkWell(
                         onTap: () {
                           _selectedTodoDate(context);
                         },
-                        child: Icon(Icons.calendar_today),
+                        child: Icon(Icons.calendar_today,size: 25,),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10.0,width: 158),
                   DropdownButtonFormField(
                     isExpanded: true,
                     decoration: InputDecoration(
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 50),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
 
-                      //Add more decoration as you want here
-                      //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+                      prefixIcon: Icon(Icons.find_replace_outlined,size: 25),
                     ),
-                    iconSize: 50,
                     value: _selectedValue,
-
                     items: _familles,
                     hint: Text('Select Famille'),
                     onChanged: (value) {
@@ -183,7 +183,7 @@ class _addComposantPageState extends State<addComposantPage> {
 
 
                   Container(
-                    margin: EdgeInsets.all(30.0),
+                    margin: EdgeInsets.all(25.0),
 
                     width: double.infinity,
                     child: FlatButton(

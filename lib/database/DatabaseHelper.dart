@@ -10,7 +10,7 @@ import 'package:mini_projeet/models/Famille.dart';
 class DatabaseHelper {
 
   static final _databaseName = "MiniProojet";
-  static final _databaseVersion = 5;
+  static final _databaseVersion = 6;
 
 
   //table admin
@@ -48,6 +48,15 @@ class DatabaseHelper {
   static final columnEmpMembre='membre';
   static final columnEmpComposant='composant';
   static final columnQteEmprunt='qte_emprunt';
+
+
+  //table emprunt
+  static final table_retourComp='RetourComposant';
+  static final columnIdretour='id_retour';
+  static final columnRetEmprunt='emprunt';
+  static final columnRetDate='date_retour';
+  static final columnRetEtat='etat';
+
 
 
 
@@ -107,22 +116,22 @@ class DatabaseHelper {
   // }
 
 
-  Future _onUpgrade(Database db, int _oldVersion, int _newVersion) async {
-    if (_oldVersion < _newVersion) {
-      await db.execute('''
-      CREATE TABLE $table_composant (
-          $columnIdComposant INTEGER PRIMARY KEY AUTOINCREMENT,
-          $columnNomComposant TEXT NOT NULL,
-          $columnRefComposant TEXT NOT NULL,
-          $columnQteDispo INTEGER,
-          $columnDateAcqui TEXT NOT NULL,
-          $columnFamComposant INTEGER,
-          FOREIGN KEY($columnFamComposant) REFERENCES famille(id_famille)
-
-      )
-       ''');
-    }
-  }
+  // Future _onUpgrade(Database db, int _oldVersion, int _newVersion) async {
+  //   if (_oldVersion < _newVersion) {
+  //     await db.execute('''
+  //     CREATE TABLE $table_composant (
+  //         $columnIdComposant INTEGER PRIMARY KEY AUTOINCREMENT,
+  //         $columnNomComposant TEXT NOT NULL,
+  //         $columnRefComposant TEXT NOT NULL,
+  //         $columnQteDispo INTEGER,
+  //         $columnDateAcqui TEXT NOT NULL,
+  //         $columnFamComposant INTEGER,
+  //         FOREIGN KEY($columnFamComposant) REFERENCES famille(id_famille)
+  //
+  //     )
+  //      ''');
+  //   }
+  // }
 
 // Future _onUpgrade(Database db, int _oldVersion, int _newVersion) async {
 //     if (_oldVersion < _newVersion) {
@@ -155,6 +164,23 @@ class DatabaseHelper {
   //      ''');
   //   }
   // }
+
+
+
+
+  Future _onUpgrade(Database db, int _oldVersion, int _newVersion) async {
+    if (_oldVersion < _newVersion) {
+      await db.execute('''
+      CREATE TABLE $table_retourComp (
+          $columnIdretour INTEGER PRIMARY KEY AUTOINCREMENT,
+          $columnRetDate TEXT NOT NULL,
+          $columnRetEmprunt TEXT NOT NULL,
+          $columnRetEtat TEXT NOT NULL,
+          FOREIGN KEY($columnRetEmprunt) REFERENCES Emprunt(id_emprunt)
+      )
+       ''');
+    }
+  }
 
 
   // Helper methods
@@ -265,11 +291,6 @@ class DatabaseHelper {
     return await db.query(table_composant);
   }
 
-  Future<int?> queryRowCountComposant() async {
-    Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table_composant'));
-  }
-
   Future<int> updateComposant(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row[columnIdComposant];
@@ -299,10 +320,6 @@ class DatabaseHelper {
     return await db.query(table_membreClub);
   }
 
-  Future<int?> queryRowCountMembre() async {
-    Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table_membreClub'));
-  }
 
   Future<int> updateMembre(Map<String, dynamic> row) async {
     Database db = await instance.database;
@@ -333,11 +350,6 @@ class DatabaseHelper {
     return await db.query(table_emprunt);
   }
 
-  Future<int?> queryRowCountEmprunt() async {
-    Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table_emprunt'));
-  }
-
   Future<int> updateEmprunt(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row[columnIdEmprunt];
@@ -354,6 +366,33 @@ class DatabaseHelper {
     return await db.query(table, where: '$columnIdEmprunt =?', whereArgs: [itemId]);
   }
 
+//table retourComposant
 
+  Future<int> insertRetourComposant(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(table_retourComp, row
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllRowsRetourComposants() async {
+    Database db = await instance.database;
+    return await db.query(table_retourComp);
+  }
+
+  Future<int> updateRetourComposant(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row[columnIdretour];
+    return await db.update(table_retourComp, row, where: '$columnIdretour = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteRetourComposant(int id) async {
+    Database db = await instance.database;
+    return await db.delete(table_retourComp, where: '$columnIdretour = ?', whereArgs: [id]);
+  }
+
+  readRetourComposantDataById(table, itemId) async {
+    Database db = await instance.database;
+    return await db.query(table, where: '$columnIdretour =?', whereArgs: [itemId]);
+  }
 
 }

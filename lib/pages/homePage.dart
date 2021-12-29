@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mini_projeet/pages/emprunt_page.dart';
 import 'package:mini_projeet/pages/familleComposantPage.dart';
 import 'package:mini_projeet/pages/membres_page.dart';
+import 'package:mini_projeet/pages/retourComposant_page.dart';
 import 'package:mini_projeet/pages/user_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
@@ -144,20 +145,20 @@ class NavigationDrawerWidget extends StatelessWidget {
                     icon: Icons.people_alt_rounded,
                     onClicked: () => selectedItem(context, 3),
                   ),
-                  const SizedBox(height: 24),
-                  Divider(color: Colors.white70),
-                  const SizedBox(height: 24),
-                  buildMenuItem(
-                    text: 'Plugins',
-                    icon: Icons.account_tree_outlined,
-                    onClicked: () => selectedItem(context, 4),
-                  ),
                   const SizedBox(height: 16),
                   buildMenuItem(
-                    text: 'Notifications',
-                    icon: Icons.notifications_outlined,
+                    text: 'Retours',
+                    icon: Icons.assignment_return_outlined ,
+                    onClicked: () => selectedItem(context, 4),
+                  ),
+
+                  Divider(color: Colors.white70),
+                  buildMenuItem(
+                    text: 'Logout',
+                    icon: Icons.logout,
                     onClicked: () => selectedItem(context, 5),
                   ),
+
                 ],
               ),
             ),
@@ -268,6 +269,11 @@ class NavigationDrawerWidget extends StatelessWidget {
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => EmpruntPage(),
+        ));
+        break;
+      case 4:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => RetourComposantPage(),
         ));
         break;
     }

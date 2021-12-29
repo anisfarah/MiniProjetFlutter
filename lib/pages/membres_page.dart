@@ -19,7 +19,6 @@ class _MembresPageState extends State<MembresPage> {
   final dbHelper = DatabaseHelper.instance;
 
   final _formKey = new GlobalKey<FormState>();
-  TextEditingController _familleNameController  =new TextEditingController();
   TextEditingController _editMembreNameController  =new TextEditingController();
   TextEditingController _editMembreNPrenomController  =new TextEditingController();
   TextEditingController _editMembreMobile1Controller  =new TextEditingController();

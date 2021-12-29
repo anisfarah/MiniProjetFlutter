@@ -67,7 +67,9 @@ class _addMembrePageState extends State<addMembrePage> {
                       controller: _conPrenomMembre,
                       icon: Icons.email,
                       inputType: TextInputType.emailAddress,
-                      hintName: 'Prenom membre'),
+                      hintName: 'Prenom membre',
+                  ),
+
                   SizedBox(height: 10.0),
                   getTextFormField(
                     controller: _conMobile1,
@@ -88,7 +90,7 @@ class _addMembrePageState extends State<addMembrePage> {
                     child: FlatButton(
 
                       child: Text(
-                        'Sumbit',
+                        'Submit',
                         style: TextStyle(color: Colors.white),
 
                       ),

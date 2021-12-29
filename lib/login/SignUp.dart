@@ -65,7 +65,7 @@ class _SignupFormState extends State<SignupForm> {
 
 // pour tester
  void _query() async {
-    final allRows = await dbHelper.queryAllRowsEmprunts();
+    final allRows = await dbHelper.queryAllRowsRetourComposants();
     print('query all rows:');
     allRows.forEach(print);
   }
@@ -125,7 +125,7 @@ class _SignupFormState extends State<SignupForm> {
                         'Signup',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: _signUp,
+                      onPressed: _query,
 
                     ),
                     decoration: BoxDecoration(

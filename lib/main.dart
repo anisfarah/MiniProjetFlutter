@@ -65,7 +65,7 @@ class _LoginDemoState extends State<LoginDemo> {
                     (Route<dynamic> route) => false);
           });
         } else {
-          alertDialog(context, "Error: User Not Found");
+          alertDialog(context, "Utilisateur non trouvé");
         }
       }).catchError((error) {
         print(error);
@@ -98,6 +98,7 @@ class _LoginDemoState extends State<LoginDemo> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Login Page"),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -107,11 +108,9 @@ class _LoginDemoState extends State<LoginDemo> {
               child: Center(
                 child: Container(
                     width: 200,
-                    height: 150,
-                    /*decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),*/
-                    //child: Image.asset('assets/images/KBR.png')
+                    height: 180,
+
+                    child: Image.asset('assets/jeune.png',height: 100,width:200)
                 ),
               ),
             ),
@@ -161,7 +160,7 @@ class _LoginDemoState extends State<LoginDemo> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             TextButton(
               onPressed: (){
