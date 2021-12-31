@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
-import 'package:mini_projeet/login/genTextFormField.dart';
 import 'package:mini_projeet/models/Composant.dart';
 import 'package:mini_projeet/pages/addComposant.dart';
-import 'package:mini_projeet/pages/addMembrePage.dart';
 import 'package:mini_projeet/pages/homePage.dart';
 import 'package:intl/intl.dart';
 

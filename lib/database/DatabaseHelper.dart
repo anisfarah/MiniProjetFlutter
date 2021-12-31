@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:mini_projeet/models/Admin.dart';
-import 'package:mini_projeet/models/Composant.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart' ;
-import 'package:mini_projeet/models/Famille.dart';
 
 class DatabaseHelper {
 
@@ -30,7 +28,7 @@ class DatabaseHelper {
   static final columnNomComposant='nom_composant';
   static final columnRefComposant='ref_composant';
   static final columnFamComposant='famille';
-  static final columnQteDispo='qte_dispo';
+  static late final columnQteDispo='qte_dispo';
   static final columnDateAcqui='date_acquisition';
 
 
@@ -339,10 +337,31 @@ class DatabaseHelper {
 
 //table emprunt
 
-  Future<int> insertEmprunt(Map<String, dynamic> row) async {
+  Future<int?> insertEmprunt(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(table_emprunt, row
-    );
+
+    List<Map<String, dynamic>> res = await db.rawQuery("SELECT * FROM $table_composant WHERE "
+        "$columnNomComposant = '${row['composant']}' ");
+
+    if (!res.isEmpty) {
+
+      int qte_emp= row['qte_emprunt'];
+      int qte_dispo= int.parse(res[0]["qte_dispo"]);
+
+       int qt = qte_dispo -  qte_emp;
+       print(qt);
+
+      if (qt < 0) return 0;
+      if(qte_emp > qte_dispo ) return 0;
+      final data = {"qte_dispo": qt};
+
+
+      await db.update('composant', data,
+          where: "nom_composant = ?", whereArgs: [ row['composant'] ]);
+
+
+      return await db.insert(table_emprunt, row);
+    }
   }
 
   Future<List<Map<String, dynamic>>> queryAllRowsEmprunts() async {

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
-import 'package:mini_projeet/pages/emprunt_page.dart';
 import 'package:mini_projeet/pages/retourComposant_page.dart';
 
 class addRetourComposantPage extends StatefulWidget {
@@ -32,15 +30,6 @@ class _addRetourComposantPageState extends State<addRetourComposantPage> {
     _loadEmprunt();
   }
 
-
-
-
-  void _query() async {
-    final allRows = await dbHelper.queryAllRowsEmprunts();
-    print('query all rows:');
-    allRows.forEach(print);
-  }
-
   _loadEmprunt() async {
     var emprunts = await dbHelper.queryAllRowsEmprunts();
 
@@ -53,9 +42,6 @@ class _addRetourComposantPageState extends State<addRetourComposantPage> {
       });
     });
   }
-
-
-
 
 
 

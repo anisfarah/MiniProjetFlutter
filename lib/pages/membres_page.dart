@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
-import 'package:mini_projeet/login/genTextFormField.dart';
-import 'package:mini_projeet/models/Famille.dart';
 import 'package:mini_projeet/models/MembreClub.dart';
 import 'package:mini_projeet/pages/addMembrePage.dart';
 import 'package:mini_projeet/pages/homePage.dart';
@@ -161,31 +158,12 @@ class _MembresPageState extends State<MembresPage> {
   }
 
 
-
-
-
-
-
   @override
   void initState() {
     super.initState();
     getAllMembres() ;  }
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-
-  void _query() async {
-    final allRows = await dbHelper.queryAllRowsComposants();
-    print('query all rows:');
-    allRows.forEach(print);
-  }
-
-
-
-
-  _showSuccessSnackBar(message) {
-    var _snackBar = SnackBar(content: message);
-    _globalKey.currentState!.showSnackBar(_snackBar);
-  }
 
   @override
   Widget build(BuildContext context) {

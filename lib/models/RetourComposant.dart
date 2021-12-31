@@ -6,6 +6,7 @@ class RetourComposant {
   late String date_retour;
   late String etat;
 
+
   RetourComposantMap() {
     var mapping = Map<String, dynamic>();
     mapping['id_retour'] = id_retour;

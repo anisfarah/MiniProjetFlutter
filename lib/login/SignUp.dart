@@ -20,7 +20,6 @@ class _SignupFormState extends State<SignupForm> {
 
 
 
-  TextEditingController _conUserId = new  TextEditingController();
   TextEditingController _conUserName = new TextEditingController();
   TextEditingController _conEmail = new TextEditingController();
   TextEditingController  _conPassword = new TextEditingController();
@@ -48,7 +47,7 @@ class _SignupFormState extends State<SignupForm> {
         };
 
         final id = await dbHelper.insert(row).then((value) {
-          alertDialog(context, "Successfully Saved");
+          alertDialog(context, "Ajout utilisateur réussit");
 
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => LoginDemo()));
@@ -60,22 +59,11 @@ class _SignupFormState extends State<SignupForm> {
   }
   }
 
-
-
-
-// pour tester
- void _query() async {
-    final allRows = await dbHelper.queryAllRowsRetourComposants();
-    print('query all rows:');
-    allRows.forEach(print);
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signup'),
+        title: Text('Signup'),centerTitle: true,
 
       ),
       body: Form(
@@ -125,7 +113,7 @@ class _SignupFormState extends State<SignupForm> {
                         'Signup',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: _query,
+                      onPressed: _signUp,
 
                     ),
                     decoration: BoxDecoration(
@@ -137,7 +125,7 @@ class _SignupFormState extends State<SignupForm> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Does you have account? '),
+                        Text('Avez-vous un compte? '),
                         FlatButton(
                           textColor: Colors.blue,
                           child: Text('Sign In'),

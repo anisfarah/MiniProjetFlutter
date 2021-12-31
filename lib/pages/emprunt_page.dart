@@ -1,16 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
-import 'package:mini_projeet/login/genTextFormField.dart';
-import 'package:mini_projeet/models/Composant.dart';
 import 'package:mini_projeet/models/Emprunt.dart';
-import 'package:mini_projeet/pages/addComposant.dart';
 import 'package:mini_projeet/pages/addEmprunt.dart';
-import 'package:mini_projeet/pages/addMembrePage.dart';
 import 'package:mini_projeet/pages/homePage.dart';
-import 'package:intl/intl.dart';
 
 
 
@@ -25,15 +19,7 @@ class _EmpruntPageState extends State<EmpruntPage> {
   final _formKey = new GlobalKey<FormState>();
 
   TextEditingController _editcontrollerQteEmprunt  =new TextEditingController();
-  TextEditingController _editEmpruntPrenomController  =new TextEditingController();
-  TextEditingController _editEmpruntComposantController  =new TextEditingController();
-  TextEditingController _editEmpruntMemController  =new TextEditingController();
 
-
-
-  TextEditingController _NomEmpruntController = TextEditingController();
-
-  TextEditingController _PrenomEmpruntController = TextEditingController();
 
   var emprunt;
   var _emprunt= Emprunt();
@@ -81,8 +67,6 @@ class _EmpruntPageState extends State<EmpruntPage> {
         emp.id_emprunt=emprunt["id_emprunt"];
         emp.membre=emprunt["membre"];
         emp.composant=emprunt["composant"];
-
-
         _empruntList.add(emp);
       });
     });

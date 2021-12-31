@@ -1,17 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
-import 'package:mini_projeet/main.dart';
 import 'package:mini_projeet/login/comHelper.dart';
-import 'package:mini_projeet/login/genTextFormField.dart';
-import 'package:mini_projeet/models/Famille.dart';
-import 'package:mini_projeet/pages/button_widget.dart';
 import 'package:mini_projeet/pages/composant_page.dart';
-import 'package:mini_projeet/pages/familleComposantPage.dart';
-import 'package:mini_projeet/pages/homePage.dart';
-import 'package:mini_projeet/pages/membres_page.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'package:intl/intl.dart';
 
 
@@ -89,7 +80,7 @@ class _addComposantPageState extends State<addComposantPage> {
       appBar: AppBar(
         title: Text('Ajouter composant'),
         centerTitle: true,
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.deepPurple,
 
       ),
       body: Form(
@@ -196,15 +187,18 @@ class _addComposantPageState extends State<addComposantPage> {
                       onPressed: () async {
                         String uname = _conNomComposant.text;
                         String ref = _conRefenceComposant.text;
-                        int qte= int.parse(_conQteDispo.text);
 
                         String  dateAqui= _conDateAqui.text;
-                        if ( (uname == "")  || (ref == "") || (qte == "")  || (dateAqui == "")  ) {
+                        if ( (uname == "")  || (ref == "") || (_conQteDispo.text == "")  || (dateAqui == "")  ) {
                           alertDialog(context, "Champ vide,ressayez!");
+                        }
+                       else if (int.parse(_conQteDispo.text) < 0 ) {
+                          alertDialog(context, "Valeur négatif,ressayez!");
                         }
 
                         else {
 
+                          int qte= int.parse(_conQteDispo.text);
 
 
                           Map<String, dynamic> row = {
@@ -215,6 +209,8 @@ class _addComposantPageState extends State<addComposantPage> {
                             DatabaseHelper.columnDateAcqui: dateAqui
 
                           };
+
+
 
                           final id = await dbHelper.insertComposant(row).then((value) {
                             Navigator.pop(context);
@@ -234,7 +230,7 @@ class _addComposantPageState extends State<addComposantPage> {
 
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent,
+                      color: Colors.deepPurple,
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),

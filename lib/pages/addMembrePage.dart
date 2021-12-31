@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
-import 'package:mini_projeet/main.dart';
 import 'package:mini_projeet/login/comHelper.dart';
 import 'package:mini_projeet/login/genTextFormField.dart';
-import 'package:mini_projeet/pages/familleComposantPage.dart';
-import 'package:mini_projeet/pages/homePage.dart';
 import 'package:mini_projeet/pages/membres_page.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
+
 
 class addMembrePage extends StatefulWidget {
   @override
@@ -25,14 +21,6 @@ class _addMembrePageState extends State<addMembrePage> {
   TextEditingController  _conPrenomMembre = new TextEditingController();
   TextEditingController  _conMobile1 = new TextEditingController();
   TextEditingController  _conMobile2 = new  TextEditingController();
-
-
-// pour tester
-  void _query() async {
-    final allRows = await dbHelper.queryAllRowsMembres();
-    print('query all rows:');
-    allRows.forEach(print);
-  }
 
 
   @override
@@ -52,10 +40,7 @@ class _addMembrePageState extends State<addMembrePage> {
 
             child: Center(
               child: Column(
-
                 mainAxisAlignment: MainAxisAlignment.center,
-
-
                 children: [
                   getTextFormField(
                       controller: _conNomMembre,
@@ -126,8 +111,6 @@ class _addMembrePageState extends State<addMembrePage> {
                             alertDialog(context, "Error: Data Save Fail");
                           });
                         }
-
-
 
                       },
 

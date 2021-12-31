@@ -110,7 +110,7 @@ class _LoginDemoState extends State<LoginDemo> {
                     width: 200,
                     height: 180,
 
-                    child: Image.asset('assets/jeune.png',height: 100,width:200)
+                    child: Image.asset('assets/images/jeune.png',height: 100,width:200)
                 ),
               ),
             ),
@@ -136,15 +136,8 @@ class _LoginDemoState extends State<LoginDemo> {
                 isObscureText: true,
               ),
             ),
-            TextButton(
-              onPressed: (){
-                //TODO FORGOT PASSWORD SCREEN GOES HERE
-              },
-              child: Text(
-                'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
-              ),
-            ),
+            SizedBox(height: 28.0),
+
             Container(
               height: 50,
               width: 250,
@@ -168,7 +161,7 @@ class _LoginDemoState extends State<LoginDemo> {
                     context, MaterialPageRoute(builder: (_) => SignupForm()));
                 },
               child: Text(
-                'New User? Create Account',
+                'Nouvel Utilisateur? Créer un compte',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               ),
             )

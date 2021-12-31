@@ -142,15 +142,6 @@ class _FamillesScreenState extends State<FamillesScreen> {
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
-  void _query() async {
-    final allRows = await dbHelper.queryAllRowsComposants();
-    print('query all rows:');
-    allRows.forEach(print);
-  }
-
-
-
-
   _showFormDialog(BuildContext context) {
     return showDialog(
         context: context,

@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
-import 'package:mini_projeet/login/genTextFormField.dart';
-import 'package:mini_projeet/models/Famille.dart';
-import 'package:mini_projeet/models/MembreClub.dart';
 import 'package:mini_projeet/models/RetourComposant.dart';
-import 'package:mini_projeet/pages/addMembrePage.dart';
 import 'package:mini_projeet/pages/addRetourComposant.dart';
 import 'package:mini_projeet/pages/homePage.dart';
 import 'package:intl/intl.dart';
@@ -28,8 +23,7 @@ class _RetourComposantPageState extends State<RetourComposantPage> {
   var _selectedValueEtat;
   List<String> _retours = ['intact', 'endommagé', 'gravement endommagé'];
   List<DropdownMenuItem<String>> _emprunts = [];
-  TextEditingController _editEmpruntController  =new TextEditingController();
-  TextEditingController _editEtatController  =new TextEditingController();
+
 
 
 
@@ -50,7 +44,7 @@ class _RetourComposantPageState extends State<RetourComposantPage> {
         ret.emprunt = retourComposant['emprunt'];
         ret.date_retour = retourComposant['date_retour'];
         ret.etat = retourComposant['etat'];
-        _retourList.add(ret);
+          _retourList.add(ret);
       });
     });
   }

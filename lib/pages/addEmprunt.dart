@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:intl/intl.dart';
 import 'package:mini_projeet/database/DatabaseHelper.dart';
 import 'package:mini_projeet/login/comHelper.dart';
 import 'package:mini_projeet/pages/emprunt_page.dart';
@@ -11,9 +9,6 @@ class addEmpruntPage extends StatefulWidget {
 }
 
 class _addEmpruntPageState extends State<addEmpruntPage> {
-
-
-  TextEditingController _todoDateController = TextEditingController();
 
   TextEditingController _controllerQteEmprunt = TextEditingController();
 
@@ -72,9 +67,6 @@ class _addEmpruntPageState extends State<addEmpruntPage> {
   }
 
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,22 +112,26 @@ class _addEmpruntPageState extends State<addEmpruntPage> {
             RaisedButton(
               onPressed: () async {
 
-                int qte= int.parse(_controllerQteEmprunt.text);
 
-                if ( (_selectedValueMembClub == "")  || (_selectedValueComposant == "") || (qte == null )  ) {
+                if (  (_controllerQteEmprunt.text == "")   ) {
                   alertDialog(context, "Champ vide,ressayez!");
+                }
+                else if (int.parse(_controllerQteEmprunt.text) < 0 ) {
+                  alertDialog(context, "Valeur négatif,ressayez!");
+
+
                 }
 
                 else {
 
+                  int qte= int.parse(_controllerQteEmprunt.text);
               String comp=_selectedValueComposant.toString();
 
-                  Map<String, dynamic> row = {
 
+                  Map<String, dynamic> row = {
                     DatabaseHelper.columnEmpMembre: _selectedValueMembClub.toString(),
                     DatabaseHelper.columnEmpComposant: comp,
                     DatabaseHelper.columnQteEmprunt: qte
-
                   };
 
                   final id = await dbHelper.insertEmprunt(row).then((value) {
